@@ -27,7 +27,7 @@ NUM_LSTM_UNITS = 50
 NUM_DENSE_UNITS = 50
 LEARNING_RATE = 0.001
 
-# MODEL PERSISTING
+# model persisting
 MODEL_NAME = "lstm_model"
 ENCODER_NAME = "encoder"
 TRAINING_HISTORY_NAME = "lstm_model_training_history"
@@ -44,3 +44,11 @@ ENCODER_PATH = os.path.join(TRAINED_MODEL_DIR, ENCODER_FILE_NAME)
 TRAINING_HISTORY_FILE_NAME = f"{TRAINING_HISTORY_NAME}_{_version}.pkl"
 TRAINING_HISTORY_PATH = os.path.join(TRAINED_MODEL_DIR, 
                                      TRAINING_HISTORY_FILE_NAME)
+
+# predicted probability rescaling
+RESCALE_PROBA = {"toxic": (0.000295, 0.933756),
+                 "severe_toxic": (0.000027, 0.477057),
+                 "obscene": (0.000035, 0.909796),
+                 "threat": (0.000098, 0.550009),
+                 "insult": (0.000042, 0.860048),
+                 "identity_hate": (0.000005, 0.497744)}
