@@ -14,39 +14,6 @@ from tensorflow.keras.preprocessing import text, sequence
 from tox_block.config import config
 
 
-
-class HyperlinkUsernameIPStopwordRemover(BaseEstimator, TransformerMixin):
-    """A transformer that removes Hyperlinks, Usernames, 
-    IP addresses from comment text"""
-    def __init__(self, re_stopword_string: str = config.RE_STOPWORD_STRING):
-        self.re_stopword_string = re_stopword_string
-
-
-    def fit(self, X: Union[np.ndarray, pd.DataFrame], y=None):
-        """Does nothing"""
-        return self
-    
-    def transform(self, X: Union[np.ndarray, pd.DataFrame], y=None) -> pd.DataFrame:
-        """Removes Hyperlinks, Usernames, IP addresses with regular expressions"""
-        if not isinstance(X, pd.DataFrame):
-            X = pd.DataFrame(X)
-
-        def remove(x: str) -> str:
-            x = x.lower()
-            # remove username, ip, hyperlinks
-            x = re.sub("\\n"," ",x)
-            x = re.sub("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}","",x)
-            x = re.sub("http://.*\..*","",x)
-            x = re.sub("\[\[User.*\|","",x)
-            # remove stop words and strip white spaces
-            x = re.sub(self.re_stopword_string,"",x,flags=re.IGNORECASE)
-            x = re.sub("\s+"," ",x)
-            return x
-        
-        # apply the remover
-        X = X.iloc[:,0].apply(remove).fillna("nanana").to_frame()
-        return X
-
 class TokenSequencer(BaseEstimator, TransformerMixin):
     """A transformer that fits a tokenizer on training text with a
     max vocabulary, converts texts to numerical sequences accordingly,
@@ -74,3 +41,42 @@ class TokenSequencer(BaseEstimator, TransformerMixin):
 
         return sequence.pad_sequences(sequences, 
                                       maxlen=self.max_sequence_length)
+
+
+class HyperlinkUsernameIPStopwordRemover(BaseEstimator, TransformerMixin):
+    """A transformer that removes Hyperlinks, Usernames, 
+    IP addresses from comment text"""
+    def __init__(self, 
+                 re_stopword_string: str = config.RE_STOPWORD_STRING,
+                 remove_stopwords: bool = True   ):
+        self.re_stopword_string = re_stopword_string
+        self.remove_stopwords = remove_stopwords
+
+
+    def fit(self, X: Union[np.ndarray, pd.DataFrame], y=None):
+        """Does nothing"""
+        return self
+    
+    def transform(self, X: Union[np.ndarray, pd.DataFrame], y=None) -> pd.DataFrame:
+        """Removes Hyperlinks, Usernames, IP addresses with regular expressions"""
+        if not isinstance(X, pd.DataFrame):
+            X = pd.DataFrame(X)
+
+        def remove(x: str) -> str:
+            x = x.lower()
+            # remove username, ip, hyperlinks
+            x = re.sub("\\n"," ",x)
+            x = re.sub("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}","",x)
+            x = re.sub("http://.*\..*","",x)
+            x = re.sub("\[\[User.*\|","",x)
+            
+            # remove stop words and strip white spaces
+            if self.remove_stopwords:
+                x = re.sub(self.re_stopword_string,"",x,flags=re.IGNORECASE)
+                x = re.sub("\s+"," ",x)
+            
+            return x
+        
+        # apply the remover
+        X = X.iloc[:,0].apply(remove).fillna("nanana").to_frame()
+        return X

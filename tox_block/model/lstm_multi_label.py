@@ -1,4 +1,4 @@
-"""A bidirectional LSTM model with multi labels (toxic or non-toxic)"""
+"""A bidirectional LSTM model with multi labels (6 types of toxicity)"""
 
 # general data handling and computation
 import pandas as pd
@@ -18,10 +18,10 @@ def get_model(embedding_matrix: np.ndarray = None,
               embedding_size: int = config.EMBEDDING_SIZE,
               max_sequence_length: int = config.MAX_SEQUENCE_LENGTH,
               max_features: int = config.MAX_FEATURES,
-              dropout: float = config.DROPOUT_ML,
-              num_lstm_units: int = config.NUM_LSTM_UNITS_ML,
-              num_dense_units: int = config.NUM_DENSE_UNITS_ML,
-              learning_rate: float = config.LEARNING_RATE_ML):
+              dropout: float = config.DROPOUT,
+              num_lstm_units: int = config.NUM_LSTM_UNITS,
+              num_dense_units: int = config.NUM_DENSE_UNITS,
+              learning_rate: float = config.LEARNING_RATE):
     """Returns a bidirectional LSTM model"""
     
     inp = Input(shape=(max_sequence_length, ))
@@ -48,7 +48,7 @@ def get_model(embedding_matrix: np.ndarray = None,
     return model
 
 # callbacks for training
-checkpoint = ModelCheckpoint(config.TRAINED_MODEL_DIR + "/checkpoint_ML.h5", 
+checkpoint = ModelCheckpoint(config.TRAINED_MODEL_DIR + "/checkpoint.h5", 
                              monitor="val_loss", 
                              verbose=1, 
                              save_best_only=True, 
