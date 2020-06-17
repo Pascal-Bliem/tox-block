@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 # python standard modules
-from typing import Union, Tuple
+from typing import Union, Tuple, List
 import re
 # modules for this package
 from tox_block.config import config
@@ -57,3 +57,22 @@ def get_embedding_matrix(token_sequencer: pp.TokenSequencer,
 
     return embedding_matrix
             
+def validate_input_data(input: Union[str, List[str]]) -> Union[str, List[str]]:
+    """Validates if the input is a string, list of strings and not empty"""
+    
+    # check if input is list
+    if isinstance(input,list):
+        # check if all list items are non-empty strings
+        for i, item in enumerate(input):
+            if not isinstance(item,str):
+                raise ValueError(f"The list item at position {i} is not a string.")
+            if item == "":
+                raise ValueError(f"The list item at position {i} is an empty string.")
+        return input
+    # check if input is non-empty string
+    elif isinstance(input,str):
+        if input == "":
+            raise ValueError("Passed an empty string.")
+        return input
+    else:
+        raise ValueError("The passed object is neither a string nor a list of strings.")
