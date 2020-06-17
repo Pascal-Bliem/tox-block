@@ -11,6 +11,9 @@ tox_block/trained_models/*.pkl
 !tox_block/trained_models/lstm_model*.h5
 !tox_block/trained_models/encoder*.pkl
 
+# research notebooks
+tox_block/notebooks/
+
 # Byte-compiled / optimized / DLL files
 tox_block/**/__pycache__/
 
