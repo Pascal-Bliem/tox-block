@@ -62,10 +62,13 @@ def validate_input_data(input: Union[str, List[str]]) -> Union[str, List[str]]:
     
     # check if input is list
     if isinstance(input,list):
+        # check if list is empty
+        if len(input) == 0:
+            raise ValueError("Passed an empty list.")
         # check if all list items are non-empty strings
         for i, item in enumerate(input):
             if not isinstance(item,str):
-                raise ValueError(f"The list item at position {i} is not a string.")
+                raise TypeError(f"The list item at position {i} is not a string.")
             if item == "":
                 raise ValueError(f"The list item at position {i} is an empty string.")
         return input
@@ -75,4 +78,4 @@ def validate_input_data(input: Union[str, List[str]]) -> Union[str, List[str]]:
             raise ValueError("Passed an empty string.")
         return input
     else:
-        raise ValueError("The passed object is neither a string nor a list of strings.")
+        raise TypeError("The passed object is neither a string nor a list of strings.")
