@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 NAME = "tox_block"
 DESCRIPTION = "This is a python package for classifying text in 6 categories of verbal toxicity using deep learning."
 URL = "https://github.com/Pascal-Bliem/tox-block"
-EMAIL = "pascal@bliem.de""
+EMAIL = "pascal@bliem.de"
 AUTHOR = "Pascal Bliem"
 REQUIRES_PYTHON = ">=3.7.0"
 
