@@ -16,7 +16,7 @@ RE_STOPWORD_STRING = "'d\\b|\\b'll\\b|\\b'm\\b|\\b're\\b|\\b's\\b|\\b've\\b|\\ba
 # model training multi label
 LIST_CLASSES = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
 BATCH_SIZE = 32
-EPOCHS = 10
+EPOCHS = 15
 VALIDATION_SPLIT = 0.1
 CLASS_WEIGHT = {0: 0.5565938358935721, 1: 4.917442218798151}
 MAX_FEATURES = 20000
@@ -46,9 +46,9 @@ TRAINING_HISTORY_PATH = os.path.join(TRAINED_MODEL_DIR,
                                      TRAINING_HISTORY_FILE_NAME)
 
 # predicted probability rescaling
-RESCALE_PROBA = {"toxic": (0.000295, 0.933756),
-                 "severe_toxic": (0.000027, 0.477057),
-                 "obscene": (0.000035, 0.909796),
-                 "threat": (0.000098, 0.550009),
-                 "insult": (0.000042, 0.860048),
-                 "identity_hate": (0.000005, 0.497744)}
+RESCALE_PROBA = {"toxic": (0.002116, 0.999858),
+                 "severe_toxic": (0.000011, 0.648682),
+                 "obscene": (0.000347, 0.997533),
+                 "threat": (0.000040, 0.918887),
+                 "insult": (0.000373, 0.986303),
+                 "identity_hate": (0.000074, 0.901117)}
