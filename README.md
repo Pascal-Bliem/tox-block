@@ -4,7 +4,7 @@ ToxBlock is a Python machine learning application for recognizing toxic language
 
 It can predict probabilities for classifying English text into six categories of verbal toxicity: toxic, severe toxic, obscene, threat, insult, and identity hate. 
 
-ToxBlock currently (`version 0.1.0`) uses a bidirectional LSTM recurrent neural network with a word embedding layer (pre-trained with the [GloVe](https://nlp.stanford.edu/projects/glove/) embeddings) and has been trained on the Toxic Comment Data Set ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license) provided by Conversation AI / Jigsaw in a [Kaggle competition](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/overview) in 2018.
+ToxBlock currently (`version 0.1.2`) uses a bidirectional LSTM recurrent neural network with a word embedding layer (pre-trained with the [GloVe](https://nlp.stanford.edu/projects/glove/) embeddings) and has been trained on the Toxic Comment Data Set ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license) provided by Conversation AI / Jigsaw in a [Kaggle competition](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/overview) in 2018.
 
 *Disclaimer: the data set used for training, test examples in this repo, as well as the usage examples presented here contain toxic language that may be considered profane, vulgar, or offensive. If you do not wish to be exposed to toxic language, DO NOT proceed to read any further.*
 
