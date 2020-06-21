@@ -8,6 +8,13 @@ ToxBlock currently (`version 0.1.2`) uses a bidirectional LSTM recurrent neural 
 
 *Disclaimer: the data set used for training, test examples in this repo, as well as the usage examples presented here contain toxic language that may be considered profane, vulgar, or offensive. If you do not wish to be exposed to toxic language, DO NOT proceed to read any further.*
 
+## Installation
+
+You can install ToxBlock form the Python package index (PyPI) using `pip`:
+```python
+pip install tox-block
+```
+
 ## Usage
 
 The methods for prediction are contained in the module `tox_block.prediction`.
